@@ -41,12 +41,28 @@ export function TaskList() {
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-    let completedTask = tasks.find((task) => task.id === id);
-    completedTask.isComplete = true;
+    let taskIndex = tasks.findIndex((item) => item.id == id);
+
+    let newTaskArray = [...tasks];
+
+    newTaskArray[taskIndex] = {
+      ...newTaskArray[taskIndex],
+      isComplete: !newTaskArray[taskIndex].isComplete,
+    };
+
+    setTasks(newTaskArray);
   }
 
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
+
+    let taskIndex = tasks.findIndex((item) => item.id == id);
+
+    let newTaskArray = [...tasks];
+
+    newTaskArray.splice(taskIndex, 1);
+
+    setTasks(newTaskArray);
   }
 
   return (
